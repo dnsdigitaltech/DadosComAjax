@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX PHP</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>WEB VIDEO AULAS</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="input-group">
+                <input type="text" class="form-control" id="palavra" placeholder="Buscar por...">
+                <span class="input-group-btn">
+                    <button class="btn-defaul" id="buscar" type="button">Buscar</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id="dados"></div>
+    <!--div id="content"></div>
+<div id='loading'></div>-->
+               
+    
+<script>
+
+  function buscar(palavra)
+    {
+        var page ="buscar.php";
+        $.ajax(
+            {
+                type: 'POST',
+                dataType: 'html',
+                url: page,
+                beforeSend: function(){
+                    $("#dados").html("Carregando...");
+                },
+                data: {palavra:palavra},
+                success: function(msg)
+                {
+                    $('#dados').html(msg);
+                }
+            }
+        );
+    }
+    $('#buscar').click(function(){
+        buscar($("#palavra").val())
+    });
+</script> 
+</body>
+</html>
